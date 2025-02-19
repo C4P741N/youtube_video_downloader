@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  youtube-audio-downloader:
+    image: youtube-audio-downloader
+    container_name: youtube-audio-downloader
+    build: .
+    volumes:
+      - ./downloads:/app/downloads
+    command: ["python", "main.py"]
+    restart: unless-stopped
