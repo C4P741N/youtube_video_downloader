@@ -8,4 +8,4 @@ services:
     volumes:
       - ./downloads:/app/downloads
     command: ["python", "main.py"]
-    restart: unless-stopped
+    # restart: unless-stopped
