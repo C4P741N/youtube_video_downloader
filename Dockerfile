@@ -1,24 +1,19 @@
 # Use an official Python image as base
 FROM python:3.9-slim
 
+# Install FFmpeg
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
+
 # Set the working directory
 WORKDIR /app
 
-# Install dependencies
-RUN apt update && apt install -y ffmpeg
-
-# Copy requirements and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# # Copy the Python script
-# COPY main.py .
-
-# Install moviepy manually (if needed)
-RUN pip install moviepy
-
 # Copy the application code
 COPY . .
+
+# Copy requirements and install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Set the entry point
 CMD ["python", "main.py"]
